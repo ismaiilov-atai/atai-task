@@ -4,9 +4,15 @@
     "dev": "bun run --hot server/index.ts"
   },
   "dependencies": {
-    "hono": "^4.7.11"
+    "dotenv": "^16.5.0",
+    "drizzle-orm": "^0.44.2",
+    "hono": "^4.7.11",
+    "pg": "^8.16.1"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/pg": "^8.15.4",
+    "drizzle-kit": "^0.31.1",
+    "tsx": "^4.20.3"
   }
 }
