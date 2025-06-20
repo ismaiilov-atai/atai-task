@@ -1,31 +1,30 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { createFileRoute } from '@tanstack/react-router';
+import Signin from '@/components/Signin';
 
 export const Route = createFileRoute('/')({
   component: App,
 });
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
-    <div className='text-center'>
-      <header className='min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white text-[calc(10px+2vmin)]'>
-        <p>
-          Edit <code>src/routes/index.tsx</code> and save to reload.
-        </p>
-        <a
-          className='text-[#61dafb] hover:underline'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'>
-          Learn React
-        </a>
-        <a
-          className='text-[#61dafb] hover:underline'
-          href='https://tanstack.com'
-          target='_blank'
-          rel='noopener noreferrer'>
-          Learn TanStack
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <section className='w-full h-full p-2'>
+        <Tabs
+          defaultValue='signup'
+          className='w-full text-center items-center place-content-center'>
+          <TabsList className=' w-full md:w-[50%]'>
+            <TabsTrigger value='signup'>Signup</TabsTrigger>
+            <TabsTrigger value='login'>Login</TabsTrigger>
+          </TabsList>
+
+          <Signin contentValue='signup' />
+          <Signin contentValue='login' />
+        </Tabs>
+      </section>
+    </QueryClientProvider>
   );
 }

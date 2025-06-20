@@ -12,7 +12,6 @@ auth
     async c => {
       try {
         const authHeader = c.req.header('Authorization')
-        const user = c.req.valid('json')
 
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
           return c.json({ error: 'Unauthorized' }, 401)
@@ -20,7 +19,8 @@ auth
 
         const token = authHeader.split(' ')[1]
         const decodedPayload = await verify(token, process.env.JWT_SECRET || '')
-        return c.json({ token }, 201)
+
+        return c.json({ token: decodedPayload }, 201)
       } catch (error) {
         return c.json({ message: 'Unauthorized' }, 401)
       }
