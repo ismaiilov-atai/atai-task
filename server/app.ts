@@ -6,8 +6,7 @@ import user from './user'
 
 const app = new Hono()
 
-app
-  .basePath('/api')
+const apiRoutes = app.basePath('/api')
   .get('/', (c) => c.redirect('api/user'))
   .route('/user', user)
   .route('/user/auth', user)
@@ -26,3 +25,4 @@ app.onError((err, c) => {
 })
 
 export default app
+export type ApiRoutes = typeof apiRoutes

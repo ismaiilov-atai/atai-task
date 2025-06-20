@@ -7,8 +7,6 @@ import { Hono } from 'hono'
 import { db } from './db'
 
 const user = new Hono()
-
-user
   .get('/', async (c) => {
     const users = await db.select().from(usersTable)
     return c.json({ users }, 200)
