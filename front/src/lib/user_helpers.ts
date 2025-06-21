@@ -7,3 +7,9 @@ export const inserUser = async (user: UserType): Promise<UserInsertResponseType>
   const result = await response.json() as UserInsertResponseType
   return result
 }
+
+export const authUser = async (user: UserType): Promise<UserInsertResponseType> => {
+  const response = await clientAPI.user.auth.$post({ json: user })
+  const result = await response.json() as UserInsertResponseType
+  return result
+}

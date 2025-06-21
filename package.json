@@ -4,6 +4,7 @@
     "dev": "bun run --hot server/index.ts"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "dotenv": "^16.5.0",
     "drizzle-orm": "^0.44.2",
     "hono": "^4.7.11",
