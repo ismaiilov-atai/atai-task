@@ -5,9 +5,11 @@ import type { SIGN_PAGE_CONTENT } from '@/types/auth_types';
 import { Card, CardContent } from '@/components/ui/card';
 import { authUser, inserUser } from '@/lib/user_helpers';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from '@tanstack/react-router';
 import { useMutation } from '@tanstack/react-query';
 import SigninCardHeader from './SigninCardHeader';
 import { capitalaizeLable } from '@/lib/utils';
+import { LoaderCircle } from 'lucide-react';
 import { TabsContent } from '../ui/tabs';
 import { Button } from '../ui/button';
 import AuthInput from './AuthInput';
@@ -21,6 +23,7 @@ interface PageProps {
 }
 
 const Signin = ({ contentValue }: PageProps) => {
+  const navigate = useNavigate({ from: '/auth' });
   const {
     register,
     handleSubmit,
@@ -45,6 +48,7 @@ const Signin = ({ contentValue }: PageProps) => {
     onSuccess: (data) => {
       if ('token' in data) {
         localStorage.setItem(ACCESS_TOKEN, data.token);
+        navigate({ to: '/' });
         toast.success(SIGNIN_MESSAGES[contentValue].success);
       } else {
         toast.error(
@@ -82,6 +86,7 @@ const Signin = ({ contentValue }: PageProps) => {
               type='submit'
               disabled={!isDirty || !isValid || isPending}>
               {capitalaizeLable(contentValue)}
+              {isPending && <LoaderCircle className='animate-spin' />}
             </Button>
           </form>
         </CardContent>
